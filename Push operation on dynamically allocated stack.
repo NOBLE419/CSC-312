@@ -1,0 +1,50 @@
+
+#include <iostream>
+
+struct Stack {
+    int size;
+    int top;
+    double* elements;
+};
+
+
+Stack* createStack(int size) {
+    Stack* stack = new Stack;
+    stack->size = size;
+    stack->top = -1;
+    stack->elements = new double[size];
+    return stack;
+}
+
+bool isFull(Stack* stack) {
+    return stack->top == stack->size - 1;
+}
+
+
+bool isEmpty(Stack* stack) {
+    return stack->top == -1;
+}
+
+
+void push(Stack* stack, double element) {
+    if (isFull(stack)) {
+        std::cout << "Stack Overflow\n";
+        return;
+    }
+    stack->elements[++stack->top] = element;
+    std::cout << element << " pushed to stack\n";
+}
+
+int main() {
+
+    Stack* stack = createStack(5);
+
+
+    push(stack, 2.51);
+    push(stack, 3.98);
+    push(stack, 5.95);
+
+    delete[] stack->elements;
+    delete stack;
+    return 0;
+}
